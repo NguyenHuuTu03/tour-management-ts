@@ -28,7 +28,6 @@ const formAddToCard = document.querySelector("[form-add-to-card]");
 if (formAddToCard) {
   const inputQuantity = formAddToCard.querySelector("input[name='quantity']");
   const btnIncrease = formAddToCard.querySelector("[btn-increase]");
-  console.log(inputQuantity.max);
   btnIncrease.addEventListener("click", () => {
     const value = parseInt(inputQuantity.value);
     if (value < parseInt(inputQuantity.max))
@@ -42,3 +41,35 @@ if (formAddToCard) {
   });
 }
 // End button quantity
+
+// Nếu chưa có giỏ hàng trong localStorage thì tạo giỏ mới cho người dùng 
+const cart = localStorage.getItem("cart");
+if (!cart) {
+  localStorage.setItem("cart", JSON.stringify([]));
+}
+
+// Thêm vào giỏ hàng
+
+if (formAddToCard) {
+  formAddToCard.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const quantity = parseInt(e.target.elements.quantity.value);
+    const tourId = formAddToCard.getAttribute("tour-id");
+
+    if (quantity > 0 && tourId) {
+      const cart = JSON.parse(localStorage.getItem("cart"));
+
+      const indexExitsTour = cart.findIndex(item => item.tourId === tourId);
+      if (indexExitsTour == -1) {
+        cart.push({
+          tourId: tourId,
+          quantity: quantity
+        });
+      } else {
+        cart[indexExitsTour].quantity = cart[indexExitsTour].quantity + quantity;
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+  });
+}
+// Hết Thêm vào giỏ hàng
