@@ -42,6 +42,26 @@ if (formAddToCard) {
 }
 // End button quantity
 
+// Alert-Success
+const alertAddCartSuccess = () => {
+  const elementAlert = document.querySelector("[alert-add-cart-success]");
+  if (elementAlert) {
+    elementAlert.classList.remove("alert-hidden");
+
+    setTimeout(() => {
+      elementAlert.classList.add("alert-hidden");
+    }, 3000);
+
+    const closeAlert = elementAlert.querySelector("[close-alert]");
+    if (closeAlert) {
+      closeAlert.addEventListener("click", () => {
+        elementAlert.classList.add("alert-hidden");
+      });
+    }
+  }
+}
+// End Alert-Success
+
 // Nếu chưa có giỏ hàng trong localStorage thì tạo giỏ mới cho người dùng 
 const cart = localStorage.getItem("cart");
 if (!cart) {
@@ -69,6 +89,7 @@ if (formAddToCard) {
         cart[indexExitsTour].quantity = cart[indexExitsTour].quantity + quantity;
       }
       localStorage.setItem("cart", JSON.stringify(cart));
+      alertAddCartSuccess();
     }
   });
 }
