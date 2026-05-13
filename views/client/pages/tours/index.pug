@@ -1,0 +1,37 @@
+extends ../../layouts/default
+include ../../mixins/box-head.pug
+
+block main
+  .container
+    +box-head("Danh sách tour du lịch")
+
+    .tour-list
+      each tour in tours
+        .tour-item
+          .tour-image
+            img(src=tour.image alt=tour.title)
+
+          .tour-content
+            h2
+              a(href=`/tours/${tour.slug}`)
+                = tour.title
+
+            p.code
+              | Mã tour: #{tour.code}
+
+            .price-group
+              if tour.discount > 0
+                span.price.price--new #{tour.newPrice.toLocaleString("vi-VN")} VNĐ
+                span.price.price--old #{tour.price.toLocaleString("vi-VN")} VNĐ
+              else
+                span.price.price--new #{tour.price.toLocaleString("vi-VN")} VNĐ
+
+            if tour.discount > 0
+              p.discount
+                | Giảm giá: #{tour.discount}%
+
+            p.stock
+              | Số chỗ còn: #{tour.stock}
+
+            a.btn-detail(href=`/tours/detail/${tour.slug}`)
+              | Xem chi tiết

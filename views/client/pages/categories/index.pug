@@ -1,0 +1,20 @@
+extends ../../layouts/default
+include ../../mixins/box-head.pug
+
+block main
+  .container
+    +box-head("Danh mục tour du lịch")
+
+    .tour-list
+      each category in categories
+        .tour-item
+          .tour-image
+            img(src=category.image alt=category.title)
+
+          .tour-content
+            h2
+              a(href=`/tours/${category.slug}`)
+                = category.title
+
+            a.btn-detail(href=`/tours/${category.slug}`)
+              | Xem chi tiết

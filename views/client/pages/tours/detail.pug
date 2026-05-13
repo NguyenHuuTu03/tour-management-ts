@@ -1,0 +1,134 @@
+extends ../../layouts/default
+include ../../mixins/moment.pug
+
+block main
+  .container
+    .detail
+
+      .detail__row
+
+        // LEFT
+        .detail__col-left
+
+          // MAIN SLIDER
+          .swiper.imagesMain
+            .swiper-wrapper
+              each img, i in tour.images
+                .swiper-slide
+                  .gallery__main
+                    img(
+                      src=img
+                      alt=`Ảnh ${i + 1}`
+                    )
+
+            .swiper-button-next
+            .swiper-button-prev
+
+          // THUMB SLIDER
+          if tour.images.length > 1
+            .swiper.imagesThumb
+              .swiper-wrapper
+                each img, i in tour.images
+                  .swiper-slide
+                    img.gallery__thumb(
+                      src=img
+                      alt=`Ảnh ${i + 1}`
+                    )
+
+
+        // ===== RIGHT =====
+        .detail__col-right
+
+          h1.detail__title= tour.title
+
+          .detail__meta
+
+            p.meta-item
+              span Mã tour
+              strong= tour.code
+
+            p.meta-item
+              span Khởi hành
+
+              strong
+                if tour.timeStart
+                  +momentDateTime(tour.timeStart)
+                else
+                  | Đang cập nhật
+
+            p.meta-item
+              span Còn lại
+              strong #{tour.stock} chỗ
+
+          .detail__price
+
+            if tour.discount > 0
+              span.price--new
+                = tour.newPrice.toLocaleString("vi-VN") + "đ"
+
+              span.price--old
+                = tour.price.toLocaleString("vi-VN") + "đ"
+
+            else
+              span.price--new
+                = tour.price.toLocaleString("vi-VN") + "đ"
+
+          form.booking-form(form-add-to-card tour-id=tour.id)
+
+            .form-group
+              label.form-label Số lượng
+
+              .quantity-control
+
+                button.qty-btn(
+                  type="button"
+                  btn-reduce
+                ) -
+
+                input.qty-input(
+                  type="number"
+                  name="quantity"
+                  value="1"
+                  min="1"
+                  max=tour.stock
+                  readonly
+                )
+
+                button.qty-btn(
+                  type="button"
+                  btn-increase
+                ) +
+
+            button.btn-submit(
+              type="submit"
+            )
+              | Thêm vào giỏ hàng
+
+      // ===== ROW BOTTOM =====
+      .detail__sections
+
+        if tour.information
+          .detail__section
+
+            h2.section__title
+              | Thông tin tour
+
+            .section__text!= tour.information
+
+        if tour.schedule
+          .detail__section
+
+            h2.section__title
+              | Lịch trình tour
+
+            .schedule
+
+              each day in JSON.parse(tour.schedule)
+                .schedule__item
+
+                  .schedule__day
+                    | Ngày #{day.day}
+
+                  .schedule__content
+                    h3.schedule__name= day.title
+                    p.schedule__desc= day.detail
