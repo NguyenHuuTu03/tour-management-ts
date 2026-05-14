@@ -26,20 +26,26 @@ const imagesMain = new Swiper(".imagesMain", {
 // button quantity
 const formAddToCard = document.querySelector("[form-add-to-card]");
 if (formAddToCard) {
-  const inputQuantity = formAddToCard.querySelector("input[name='quantity']");
-  const btnIncrease = formAddToCard.querySelector("[btn-increase]");
-  btnIncrease.addEventListener("click", () => {
-    const value = parseInt(inputQuantity.value);
-    if (value < parseInt(inputQuantity.max))
-      inputQuantity.value = value + 1;
-  });
-  const btnReduce = formAddToCard.querySelector("[btn-reduce]");
+  const inputQuantity = document.querySelector("input[name='quantity']");
+  const btnIncrease = document.querySelector("[btn-increase]");
+  if (btnIncrease) {
+    btnIncrease.addEventListener("click", () => {
+      const value = parseInt(inputQuantity.value);
+      if (value < parseInt(inputQuantity.max))
+        inputQuantity.value = value + 1;
+    });
+  }
+}
+
+const btnReduce = document.querySelector("[btn-reduce]");
+if (btnReduce) {
   btnReduce.addEventListener("click", () => {
     const value = parseInt(inputQuantity.value);
     if (value > parseInt(inputQuantity.min))
       inputQuantity.value = value - 1;
   });
 }
+
 // End button quantity
 
 // Alert-Success
@@ -68,8 +74,19 @@ if (!cart) {
   localStorage.setItem("cart", JSON.stringify([]));
 }
 
-// Thêm vào giỏ hàng
 
+// Show mini-cart
+const showMiniCart = () => {
+  const miniCart = document.querySelector("[mini-cart]");
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+  miniCart.innerHTML = totalQuantity;
+}
+
+showMiniCart();
+// End Show mini-cart
+
+// Thêm vào giỏ hàng
 if (formAddToCard) {
   formAddToCard.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -90,6 +107,7 @@ if (formAddToCard) {
       }
       localStorage.setItem("cart", JSON.stringify(cart));
       alertAddCartSuccess();
+      showMiniCart();
     }
   });
 }

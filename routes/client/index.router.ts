@@ -1,3 +1,4 @@
+import { cartRoutes } from "./cart.router";
 import { categoryRoutes } from "./category.router";
 import { tourRoutes } from "./tour.router";
 import { Express } from "express";
@@ -5,6 +6,7 @@ import { Express } from "express";
 const clientRoutes = (app: Express) => {
   app.use("/tours", tourRoutes);
   app.use("/categories", categoryRoutes);
+  app.use("/cart", cartRoutes);
 };
 
 export default clientRoutes;
