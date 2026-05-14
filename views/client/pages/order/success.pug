@@ -1,0 +1,89 @@
+extends ../../layouts/default
+include ../../mixins/moment
+block main
+  .page-success
+
+    // ===== SUCCESS HEADER (THAY ALERT) =====
+    .success-banner
+      .icon
+        i.ti.ti-circle-check
+      .content
+        h2 Đặt hàng thành công!
+        p Cảm ơn bạn đã sử dụng dịch vụ. Đơn hàng của bạn đang được xử lý.
+      .badge-success
+        | Thành công
+
+    // ===== ORDER INFO =====
+    .order-header
+      h1 Chi tiết đơn hàng
+      .code
+        i.ti.ti-receipt
+        | Mã đơn:
+        strong #{order.code}
+        span.badge #{order.status}
+
+    // ===== CUSTOMER CARD =====
+    .card
+      .card-title
+        i.ti.ti-user
+        | Thông tin khách hàng
+
+      table.customer-table
+        tbody
+          tr
+            th Họ tên
+            td #{order.fullName}
+
+          tr
+            th Số điện thoại
+            td #{order.phone}
+
+          tr
+            th Ghi chú
+            td #{order.note}
+
+    // ===== TOUR TABLE =====
+    .card
+      .card-title
+        i.ti.ti-map-pin
+        | Danh sách tour đã đặt
+
+      table
+        thead
+          tr
+            th Ảnh
+            th Tour
+            th SL
+            th Đơn giá
+            th Giảm giá
+            th Thành tiền
+
+        tbody
+          each item in orderItem
+            tr
+              td
+                img.tour-img(src=item.image)
+              td
+                a(href=`/tours/detail/${item.slug}`).tour-name #{item.title}
+                .tour-sub 
+                  +momentDate(item.timeStart)
+              td #{item.quantity}
+              td #{item.priceNew.toLocaleString()} đ
+              td
+                span.discount-pill #{item.discount}%
+              td
+                strong #{item.total.toLocaleString()} đ
+
+      .summary-row.total
+        span Tổng cộng
+        span #{order.totalPrice.toLocaleString()} đ
+
+    // ===== ACTION =====
+    .actions.mt-3
+      a.btn.btn-primary(href="/")
+        i.ti.ti-home
+        | Trang chủ
+
+      a.btn.btn-secondary(href="/tours")
+        i.ti.ti-compass
+        | Tiếp tục đặt tour

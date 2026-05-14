@@ -1269,6 +1269,8 @@ form[form-add-to-card] {
 .tour-name {
   font-weight: 600;
   text-align: left;
+  text-decoration: none;
+  color: #000;
 }
 
 .quantity-input {
@@ -1376,5 +1378,247 @@ form[form-add-to-card] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+/* =================================================================================================================== */
+.page-success {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 16px;
+  font-family: "Segoe UI", sans-serif;
+  color: #111827;
+  background: #f6f7fb;
+}
+
+/* ================= SUCCESS BANNER ================= */
+.success-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border: 1px solid #a7f3d0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+}
+
+.success-banner .icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+}
+
+.success-banner h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.success-banner p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #065f46;
+}
+
+.badge-success {
+  margin-left: auto;
+  background: #10b981;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ================= ORDER HEADER ================= */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 18px 0;
+}
+
+.order-header h1 {
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.code {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.badge {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+/* ================= CARD ================= */
+.card {
+  background: #fff;
+  padding: 18px;
+  border-radius: 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* ================= TABLE GLOBAL (TOUR TABLE) ================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 12px;
+  background: #f3f4f6;
+  font-size: 13px;
+  font-weight: 700;
+  color: #374151;
+}
+
+td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* ================= TOUR ================= */
+.tour-img {
+  width: 70px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.tour-name {
+  font-weight: 700;
+}
+
+.tour-sub {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* ================= DISCOUNT ================= */
+.discount-pill {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ================= SUMMARY ================= */
+.summary-card {
+  background: linear-gradient(135deg, #0ea5e9, #22c55e);
+  color: white;
+  padding: 18px;
+  border-radius: 16px;
+}
+
+.summary-title {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.summary-row.total {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  margin-top: 10px;
+  padding-top: 10px;
+  font-weight: 800;
+}
+
+/* ================= BUTTONS ================= */
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.btn:not(.btn-primary) {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.btn:not(.btn-primary):hover {
+  background: #e5e7eb;
+}
+
+/* ================= CUSTOMER TABLE (FIXED + CLEAN) ================= */
+.customer-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.customer-table th {
+  text-align: left;
+  width: 180px;
+  padding: 12px 14px;
+  background: #f3f4f6;
+  font-size: 13px;
+  font-weight: 700;
+  color: #374151;
+}
+
+.customer-table td {
+  padding: 12px 14px;
+  font-weight: 600;
+  color: #111827;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.customer-table tr:hover td {
+  background: #f9fafb;
+}
+
+.customer-table tr:last-child th,
+.customer-table tr:last-child td {
+  border-bottom: none;
 }
 /* =================================================================================================================== */
