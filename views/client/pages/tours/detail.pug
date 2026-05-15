@@ -123,14 +123,14 @@ block main
             h2.section__title
               | Lịch trình tour
 
+            - const schedules = JSON.parse(tour.schedule)
             .schedule
+              if Array.isArray(schedules)
+                each day in schedules
+                  .schedule__item
+                    .schedule__day
+                      | Ngày #{day.day}
 
-              each day in JSON.parse(tour.schedule)
-                .schedule__item
-
-                  .schedule__day
-                    | Ngày #{day.day}
-
-                  .schedule__content
-                    h3.schedule__name= day.title
-                    p.schedule__desc= day.detail
+                    .schedule__content
+                      h3.schedule__name= day.title
+                      p.schedule__desc= day.detail

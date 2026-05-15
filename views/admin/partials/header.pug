@@ -1,0 +1,17 @@
+header.admin-header
+  .admin-header-inner
+
+    // Logo
+    .admin-logo
+      a(href="/admin") Admin Panel
+
+    // Right actions
+    .admin-actions
+
+      if user
+        .admin-user
+          span Xin chào, #{user.fullName || user.email}
+
+        a.btn-logout(href="/admin/auth/logout") Đăng xuất
+      else
+        a.btn-login(href="/admin/auth/login") Đăng nhập

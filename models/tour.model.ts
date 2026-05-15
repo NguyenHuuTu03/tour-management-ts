@@ -1,5 +1,6 @@
 import { Sequelize, DataTypes, STRING, TEXT } from "sequelize";
 import sequelize from "../config/database";
+import slugify from "slugify";
 
 const Tour = sequelize.define(
   "Tour",
@@ -47,7 +48,7 @@ const Tour = sequelize.define(
     },
     slug: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     deleted: {
       type: DataTypes.BOOLEAN,
@@ -63,4 +64,13 @@ const Tour = sequelize.define(
   },
 );
 
+Tour.beforeCreate((tour: any) => {
+  tour.slug = slugify(`${tour.title}-${Date.now()}`, {
+    replacement: "-", // thay thế các khoảng trắng bằng "-"
+    lower: true, // chuyển thành chữ thường, mặc định là false
+    strict: true, // loại bỏ các ký tự đặc biệt, mặc định là false
+    locale: "vi", // ngôn ngữ sử dụng
+    trim: true, // loại bỏ các khoảng trắng ở đầu và cuối chuỗi
+  });
+});
 export default Tour;

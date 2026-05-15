@@ -1,0 +1,41 @@
+extends ../../layouts/default.pug
+
+block main
+  .container
+    .page-header
+      h1 Quản lý danh mục
+      a.btn-add(href="/admin/categories/create") + Thêm mới
+
+    // CARD WRAPPER
+    .card
+
+      .card-header
+        h3 Danh sách danh mục
+
+      .card-body
+
+        table.table
+          thead
+            tr
+              th
+                input(type="checkbox")
+              th STT
+              th Ảnh
+              th Tiêu đề
+              th Trạng thái
+              th Hoạt động
+
+          tbody
+            each item, index in records
+              tr
+                td
+                  input(type="checkbox" value="1")
+                td #{index + 1}
+                td
+                  img.table-img(src=item.image)
+                td #{item.title}
+                td
+                  button.badge.badge-success #{item.status == "active"? "Hoạt động": "Dừng hoạt động"}
+                td
+                  a.btn-edit(href=`/admin/edit/${item.id}`) Sửa
+                  a.btn-delete(href=`/admin/delete/${item.id}`) Xoá

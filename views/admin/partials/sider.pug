@@ -1,0 +1,19 @@
+aside.admin-sidebar
+  .sidebar-title
+    span MENU QUẢN TRỊ
+
+  ul.sidebar-menu
+    li
+      a(href="/admin", class=(active == "dashboard" ? "active" : "")) Dashboard
+
+    li
+      a(href="/admin/tours", class=(active == "tours" ? "active" : "")) Quản lý Tour
+
+    li
+      a(href="/admin/orders", class=(active == "orders" ? "active" : "")) Đơn hàng
+
+    li
+      a(href="/admin/users", class=(active == "users" ? "active" : "")) Người dùng
+
+    li
+      a(href="/admin/categories", class=(active == "categories" ? "active" : "")) Danh mục

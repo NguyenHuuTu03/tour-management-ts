@@ -1,0 +1,131 @@
+extends ../../layouts/default.pug
+
+block main
+  .page-header
+    h1 Thêm Tour Du Lịch
+
+  .form-card
+    .card-header
+      h3 Thông tin tour
+
+    .card-body
+      form.form(
+        action=`${prefixAdmin}/tours/create`
+        method="POST"
+        enctype="multipart/form-data"
+      )
+
+        .form-grid
+
+          // TÊN TOUR
+          .form-group
+            label Tên tour
+            input(
+              type="text"
+              name="title"
+              placeholder="Nhập tên tour..."
+            )
+
+          // DANH MỤC
+          .form-group
+            label Danh mục
+            select(name="category_id")
+              option(value="" selected) -- Chọn danh mục --
+              each category in categories
+                option(value=category.id) #{category.title}
+
+          // GIÁ
+          .form-group
+            label Giá tour
+            input(
+              type="number"
+              name="price"
+              placeholder="Nhập giá tour..."
+            )
+
+          // GIẢM GIÁ
+          .form-group
+            label Giảm giá (%)
+            input(
+              type="number"
+              name="discount"
+              placeholder="Nhập phần trăm giảm giá..."
+            )
+
+          // SỐ LƯỢNG
+          .form-group
+            label Số lượng
+            input(
+              type="number"
+              name="stock"
+              placeholder="Nhập số lượng..."
+            )
+
+          // VỊ TRÍ
+          .form-group
+            label Vị trí
+            input(
+              type="number"
+              name="position"
+              placeholder="Nhập vị trí..."
+            )
+
+          // LỊCH KHỞI HÀNH
+          .form-group
+            label Thời gian khởi hành
+            input(
+              type="datetime-local"
+              name="timeStart"
+            )
+
+          // TRẠNG THÁI
+          .form-group
+            label Trạng thái
+            select(name="status")
+              option(value="active") Hoạt động
+              option(value="inactive") Dừng hoạt động
+
+          .form-group
+            label Chọn nhiều ảnh tour
+
+            input#imageInput(
+              type="file"
+              class="form-control-file"
+              name="images"
+              accept="image/*"
+              multiple
+            )
+
+            label.file-upload-label(for="imageInput")
+              | Chọn ảnh tour
+
+            // PREVIEW
+            .image-preview#preview
+
+        // Thông tin
+        .form-group
+          label Thông tin tour
+          textarea(
+            name="information"
+            rows="6"
+            placeholder="Nhập thông tin tour..."
+            textarea-mce
+          )
+
+        // Lịch trình
+        .form-group
+          label Lịch trình tour
+          textarea(
+            name="schedule"
+            rows="6"
+            placeholder="Nhập lịch trình tour..."
+            textarea-mce
+          )
+
+        // BUTTON
+        .form-actions
+          button.btn-submit(type="submit")
+            | Thêm tour
+
+          a.btn-back(href=`${prefixAdmin}/tours`)
+            | Quay lại

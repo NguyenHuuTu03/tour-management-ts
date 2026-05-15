@@ -1,0 +1,1 @@
+- npm i slugify // thư viện tạo slug sử dụng trong sequelize
